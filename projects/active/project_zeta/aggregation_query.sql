@@ -1,0 +1,1 @@
+-- Summary aggregation pivot query
