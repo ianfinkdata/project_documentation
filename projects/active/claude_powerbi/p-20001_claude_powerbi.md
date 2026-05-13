@@ -28,3 +28,28 @@ Explore using Claude as an agent layer on top of Power BI workflows — likely c
 - What is the primary input — natural language prompts, existing reports, raw data?
 - Is the goal automation, assistance, or both?
 
+## MCP Server integration
+
+Microsoft released a Power BI MCP Server (preview, Nov 2025) that allows Claude to interact directly with Power BI semantic models without opening the application. This is the primary integration path being adopted.
+
+**What it enables:**
+- **DAX generation & optimization** — translate plain English into DAX measures, benchmark and refactor existing queries
+- **Semantic model documentation** — bulk update table/field descriptions, generate business-language explanations of measures
+- **Power Query / M code** — write transformation logic from natural language descriptions
+- **Conversational analytics** — query live Fabric semantic models and get answers without building a report
+- **Report development** — handle technical syntax while the user focuses on the business question
+
+The integration point is the semantic model layer, not the report or UI layer.
+
+## Reference links
+
+- [Use Claude to Talk to Your Power BI XMLA Data via CData Connect AI](https://www.cdata.com/kb/tech/powerbixmla-cloud-claude.rst)
+- [AI as a Thinking Partner: Using Claude + Power BI MCP in Campaign Analysis](https://medium.com/@tomato.fang/ai-as-a-thinking-partner-using-claude-power-bi-mcp-in-campaign-analysis-f7d3d4ffcd25)
+- [Claude + Power BI END-USER AI Analytics (Fabric Models + MCP) — YouTube](https://www.youtube.com/watch?v=OTZVL-leV38)
+- [Claude + Power BI Integration — MASSIVE Breakthrough via MCP (Nov 2025) — YouTube](https://www.youtube.com/watch?v=jDSoSJz4ams)
+- [How to Use Claude AI to Build Power BI Reports 10x Faster in 2026](https://pcwebinars.com/how-to-use-claude-ai-to-build-power-bi-reports-10x-faster-in-2026/)
+- [My Gen-BI Experiment #1: Claude Meets Power BI](https://medium.com/@tomato.fang/my-gen-bi-experiment-1-claude-meets-power-bi-4ecd1844cd50)
+- [Connect Claude AI to Power BI and SAVE HOURS (MCP) — YouTube](https://www.youtube.com/watch?v=NITlilK5LPE)
+- [AI for PE finance teams: Claude in Excel, MCP for Power BI](https://hollandmountain.com/ai-for-finance-teams-in-private-equity/)
+- [How to connect Claude AI to Power BI with MCP Server — LinkedIn](https://www.linkedin.com/posts/datataleau_powerbi-dax-ai-activity-7397406055519088640-RITb)
+
