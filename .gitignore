@@ -1,3 +1,7 @@
+# Project status folders — complete and paused are not tracked
+projects/complete/
+projects/paused/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

@@ -38,15 +38,15 @@ projects/active/project_gamma/source_data_sample.csv
 projects/
 ├── active/
 │   └── project_name/
-│       ├── J-XXXXX_project.md
+│       ├── J-XXXXX_project_name.md
 │       └── (all project files, flat)
 ├── complete/
 │   └── project_name/
-│       ├── J-XXXXX_project.md
+│       ├── J-XXXXX_project_name.md
 │       └── (all project files, flat)
 └── paused/
     └── project_name/
-        ├── J-XXXXX_project.md
+        ├── J-XXXXX_project_name.md
         └── (all project files, flat)
 ```
 
@@ -62,16 +62,16 @@ projects/
 
 - **No subfolders within a project** — all files sit directly in the project folder
 - **Moving between states** means moving the folder between `active/`, `complete/`, and `paused/` — the folder name never changes
-- **Every project** gets a `J-XXXXX_project.md` file — the ticket number prefix makes the project identifier visible in the file listing without opening anything
+- **Every project** gets a `J-XXXXX_project_name.md` file — both the ticket number and project name are visible in the file listing without opening anything
 - **File naming** should be descriptive enough to identify purpose without opening the file
 
 ---
 
-## `J-XXXXX_project.md`
+## `J-XXXXX_project_name.md`
 
-Each project contains a `J-XXXXX_project.md` as a lightweight anchor back to the source of truth in your ticketing system. It is not a documentation file — it is a pointer.
+Each project contains a `J-XXXXX_project_name.md` as a lightweight anchor back to the source of truth in your ticketing system. It is not a documentation file — it is a pointer.
 
-The ticket number in the filename makes the project identifier visible in any file listing without opening anything. It is always the first thing you see when you open a project folder.
+The ticket number and project name in the filename make both visible in any file listing without opening anything. It is always the first thing you see when you open a project folder.
 
 ```markdown
 # project_name
@@ -89,7 +89,7 @@ A flat, predictable path means an AI assistant can:
 - List all files in a project with a single directory read
 - Identify file types from extensions without traversing subfolders
 - Locate any project by scanning `active/`, `complete/`, or `paused/` without needing an explicit path in the prompt
-- Read `_project.md` to identify the project and link to its ticket without asking the user
+- Read `J-XXXXX_project_name.md` to identify the project and link to its ticket without asking the user
 
 ---
 
