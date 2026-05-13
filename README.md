@@ -1,4 +1,4 @@
-# project_documentation
+# project documentation... documentation 
 
 A repeatable template for organizing project work — designed to be simple for humans to navigate and clear enough for AI tools to find files without being given explicit paths.
 
