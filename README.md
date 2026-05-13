@@ -101,12 +101,12 @@ A flat, predictable path means an AI assistant can:
 |---|---|---|---|
 | project_alpha | active | J-10001 | old (type subfolders) |
 | project_beta | complete | J-10002 | old (type subfolders) |
-| project_gamma | active | J-10003 | new (flat) |
-| project_delta | active | J-10004 | new (flat) |
-| project_epsilon | active | J-10005 | new (flat) |
-| project_zeta | active | J-10006 | new (flat) |
-| project_eta | active | J-10007 | new (flat) |
-| project_theta | active | J-10008 | new (flat) |
+| project_gamma | paused | J-10003 | new (flat) |
+| project_delta | paused | J-10004 | new (flat) |
+| project_epsilon | paused | J-10005 | new (flat) |
+| project_zeta | paused | J-10006 | new (flat) |
+| project_eta | paused | J-10007 | new (flat) |
+| project_theta | paused | J-10008 | new (flat) |
 | project_iota | complete | J-10009 | new (flat) |
 | project_kappa | complete | J-10010 | new (flat) |
 | project_lambda | complete | J-10011 | new (flat) |
