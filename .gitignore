@@ -2,6 +2,11 @@
 projects/complete/
 projects/paused/
 
+# Power BI Project (.pbip) local files — auto-generated, per-machine, not source-controllable
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+**/.pbi/editorSettings.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
