@@ -1,0 +1,132 @@
+table dim_accounts
+	lineageTag: 74e765d6-e82f-432e-94fa-e60cce9edec3
+
+	/// Unique identifier for each account record.
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bc2d3630-eb10-4dac-9c62-7fa13966857f
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Name of the customer or prospect account.
+	column account_name
+		dataType: string
+		lineageTag: d94277b3-499f-4401-9ca9-cc0d79d531fd
+		summarizeBy: none
+		sourceColumn: account_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Industry vertical the account operates in (e.g., Technology, Healthcare, Finance).
+	column industry
+		dataType: string
+		lineageTag: 2b94afad-fba8-44a9-ab21-e29aedaf4d7c
+		summarizeBy: none
+		sourceColumn: industry
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Market segment classification of the account (e.g., Enterprise, Mid-Market, SMB).
+	column segment
+		dataType: string
+		lineageTag: b1dabc06-85f0-4e9b-8366-e0cec9f3e443
+		summarizeBy: none
+		sourceColumn: segment
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country where the account is headquartered.
+	column country
+		dataType: string
+		lineageTag: 702d4bbb-ad79-43a6-83f3-12443a6bb0da
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Two-letter state or province abbreviation code.
+	column state_code
+		dataType: string
+		lineageTag: efb41617-f680-48e3-b452-659c245e2a9a
+		summarizeBy: none
+		sourceColumn: state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Full name of the state or province.
+	column state_name
+		dataType: string
+		lineageTag: ba395a3b-398b-4ce0-9fe8-31eee36834d3
+		summarizeBy: none
+		sourceColumn: state_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Broader geographic region grouping for the state (e.g., Northeast, West, South).
+	column state_region
+		dataType: string
+		lineageTag: f0e73075-4c5d-4ea5-b605-75d0aa59f33f
+		summarizeBy: none
+		sourceColumn: state_region
+
+		annotation SummarizationSetBy = Automatic
+
+	/// City where the account is headquartered.
+	column city
+		dataType: string
+		lineageTag: 93199489-dc83-46d7-a2a0-a1fad3d09a02
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Reported annual revenue of the account in US dollars.
+	column annual_revenue
+		dataType: double
+		lineageTag: 3f778d68-0396-4f51-8e8b-794e8e4af114
+		summarizeBy: none
+		sourceColumn: annual_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total number of employees at the account.
+	column employee_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 24a6bca5-4090-4b2d-b8a1-2fb00008efba
+		summarizeBy: none
+		sourceColumn: employee_count
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the account record was first created in the CRM system.
+	column account_created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 97c232e6-cd85-440a-8034-e81ac6de0ef7
+		summarizeBy: none
+		sourceColumn: account_created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_accounts = m
+		mode: import
+		queryGroup: 'sales_pipeline dimensions'
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
+				    sales_pipeline_dim_accounts = Source{[Schema="sales_pipeline",Item="dim_accounts"]}[Data]
+				in
+				    sales_pipeline_dim_accounts
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

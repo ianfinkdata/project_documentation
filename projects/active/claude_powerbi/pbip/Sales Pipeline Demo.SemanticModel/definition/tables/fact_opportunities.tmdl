@@ -1,0 +1,233 @@
+table fact_opportunities
+	lineageTag: df488d23-5091-4f34-b00c-6a4023ff1e43
+
+	/// Unique identifier for each sales opportunity. Primary key for this table.
+	column opportunity_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c735820-cde9-4ed7-86dc-141d0efe2c03
+		summarizeBy: none
+		sourceColumn: opportunity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Descriptive name or title of the sales opportunity.
+	column opportunity_name
+		dataType: string
+		lineageTag: 29b1cef1-f3da-4b27-a4ce-1c157cc367c0
+		summarizeBy: none
+		sourceColumn: opportunity_name
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key linking to the dim_accounts table.
+	column account_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fd147b7b-c618-4b34-81bd-d72bade2e1c1
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Foreign key linking to the dim_sales_reps table.
+	column sales_rep_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ae8b7563-c16a-4bde-a399-4d12b6ee609b
+		summarizeBy: none
+		sourceColumn: sales_rep_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Identifier for the product associated with this opportunity.
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c64ddb11-7e9d-4478-ab63-269092eac6de
+		summarizeBy: sum
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Date the opportunity was created in the CRM system.
+	column created_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ed1aadf3-f0bc-4fb6-832d-7199d116e5bb
+		summarizeBy: none
+		sourceColumn: created_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Projected date by which the opportunity is expected to close.
+	column expected_close_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 20ea19fe-59be-4509-aa38-adb6d7734041
+		summarizeBy: none
+		sourceColumn: expected_close_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Date the opportunity was actually closed (won or lost).
+	column actual_close_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7a04bdae-a842-41bd-a09f-e77a632284cf
+		summarizeBy: none
+		sourceColumn: actual_close_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Current sales pipeline stage of the opportunity (e.g., Prospecting, Proposal, Negotiation, Closed Won).
+	column stage
+		dataType: string
+		lineageTag: f911b72f-a4c8-4b16-9635-d566e4cff926
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Channel or source through which the lead was generated (e.g., Inbound, Referral, Outbound).
+	column lead_source
+		dataType: string
+		lineageTag: 3185b0f1-aed6-4d79-a848-0c577c763c8a
+		summarizeBy: none
+		sourceColumn: lead_source
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Total deal value of the opportunity in US dollars.
+	column amount
+		dataType: double
+		lineageTag: c2fe0ddd-b435-48a5-b274-745c46a7e237
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Number of units or licenses associated with the opportunity.
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: df4e4855-53f2-49b2-9754-4fc04728fa8e
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Estimated likelihood of winning the opportunity expressed as a decimal (0.0 to 1.0).
+	column probability
+		dataType: double
+		lineageTag: 7fdb0aeb-ceef-4bcf-82c7-0c4dbd86c9bd
+		summarizeBy: sum
+		sourceColumn: probability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Indicates whether the opportunity has been closed, either won or lost (true/false).
+	column is_closed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c0bc6e8d-f9b9-4a64-a99c-bb6b97ded626
+		summarizeBy: none
+		sourceColumn: is_closed
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Indicates whether the opportunity was closed as won (true/false).
+	column is_won
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 40b26fbf-3979-4da4-9292-949e62723725
+		summarizeBy: none
+		sourceColumn: is_won
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Deal amount multiplied by the win probability, representing the expected value of the opportunity.
+	column weighted_amount
+		dataType: double
+		lineageTag: e1e17966-7ce2-40e3-a37a-3751cff454d7
+		summarizeBy: sum
+		sourceColumn: weighted_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Flag indicating the opportunity is still active and in progress (1=Open, 0=Closed).
+	column is_open
+		dataType: int64
+		formatString: 0
+		lineageTag: a1ceb38c-8e6e-4bba-ba0c-8c2595016589
+		summarizeBy: sum
+		sourceColumn: is_open
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Flag indicating the opportunity was closed as lost (1=Lost, 0=Otherwise).
+	column is_lost
+		dataType: int64
+		formatString: 0
+		lineageTag: 89537c25-89cd-47b3-9cc1-efb8a34974aa
+		summarizeBy: sum
+		sourceColumn: is_lost
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of days between the created date and the expected close date.
+	column expected_cycle_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 1dca899a-de1d-4962-9511-4144eb5adab8
+		summarizeBy: sum
+		sourceColumn: expected_cycle_days
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of days between the created date and the actual close date.
+	column actual_cycle_days
+		dataType: int64
+		formatString: 0
+		lineageTag: eaef5595-3590-4833-9f65-beaeb2f969c3
+		summarizeBy: sum
+		sourceColumn: actual_cycle_days
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Number of days the opportunity has been open as of the current date (for open opportunities).
+	column days_open_current
+		dataType: int64
+		formatString: 0
+		lineageTag: e42d3877-a290-480e-a7b9-7b2f748b4339
+		summarizeBy: sum
+		sourceColumn: days_open_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_opportunities = m
+		mode: import
+		queryGroup: 'sales_pipeline fact'
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
+				    sales_pipeline_fact_opportunities = Source{[Schema="sales_pipeline",Item="fact_opportunities"]}[Data]
+				in
+				    sales_pipeline_fact_opportunities
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

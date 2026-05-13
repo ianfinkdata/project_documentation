@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Sales Pipeline Demo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "06b24b89-d65b-427c-932f-a53be12da194"
+  }
+}

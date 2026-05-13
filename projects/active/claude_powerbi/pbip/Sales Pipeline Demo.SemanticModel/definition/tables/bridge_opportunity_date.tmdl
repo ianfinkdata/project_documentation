@@ -1,0 +1,62 @@
+/// unpivoted bridge table from the sales_pipeline database that includes the created, expected and actual close dates.
+table bridge_opportunity_date
+	lineageTag: 12d24f8c-d3ff-4150-bd8a-bbbac5d777a8
+
+	/// Foreign key linking to the fact_opportunities table.
+	column opportunity_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 29ebe64a-0a6f-4b63-8048-5c85b36937f8
+		summarizeBy: none
+		sourceColumn: opportunity_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The actual date value for the given date type.
+	column date
+		dataType: dateTime
+		formatString: MM/DD/YY
+		lineageTag: 0177474a-36e9-416e-8fa5-e21adf8769a0
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Classifies the date as one of: created, expected_close, or actual_close.
+	column date_type
+		dataType: string
+		lineageTag: 0dfb7fc8-b931-41c1-819b-beff96970123
+		summarizeBy: none
+		sourceColumn: date_type
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Integer surrogate key linking to the dim_date table (format YYYYMMDD).
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c648612-054c-487f-95ab-8c60185b0d26
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bridge_opportunity_date = m
+		mode: import
+		queryGroup: 'sales_pipeline dimensions'
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
+				    sales_pipeline_bridge_opportunity_date = Source{[Schema="sales_pipeline",Item="bridge_opportunity_date"]}[Data],
+				    #"Added Custom" = Table.AddColumn(sales_pipeline_bridge_opportunity_date, "DateKey", each Int64.From(Date.ToText([date], "yyyMMdd")), Int64.Type)
+				in
+				    #"Added Custom"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

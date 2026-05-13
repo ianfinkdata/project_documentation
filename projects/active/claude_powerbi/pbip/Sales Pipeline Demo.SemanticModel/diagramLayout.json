@@ -1,0 +1,89 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 898.64425166653018,
+            "y": 16.279852406223036
+          },
+          "nodeIndex": "dim_accounts",
+          "nodeLineageTag": "74e765d6-e82f-432e-94fa-e60cce9edec3",
+          "size": {
+            "height": 104,
+            "width": 299
+          },
+          "zIndex": 2,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 36.5016285904353
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "bb203f38-a1a4-4e83-85fc-e801996e7494",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 919.01612461541265,
+            "y": 423.34411849230992
+          },
+          "nodeIndex": "dim_sales_reps",
+          "nodeLineageTag": "d1abe373-3c32-4337-b58c-4840dc745339",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1,
+          "expandedHeight": 296
+        },
+        {
+          "location": {
+            "x": 370.16369996220158,
+            "y": 15.297106724959633
+          },
+          "nodeIndex": "bridge_opportunity_date",
+          "nodeLineageTag": "12d24f8c-d3ff-4150-bd8a-bbbac5d777a8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 507.74793416179352,
+            "y": 301.373754121036
+          },
+          "nodeIndex": "fact_opportunities",
+          "nodeLineageTag": "df488d23-5091-4f34-b00c-6a4023ff1e43",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 92.1384274605966,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

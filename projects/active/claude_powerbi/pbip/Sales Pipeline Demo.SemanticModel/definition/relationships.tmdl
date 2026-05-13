@@ -1,0 +1,16 @@
+relationship AutoDetected_ada42165-7498-4680-a368-bd5a6cc04977
+	fromColumn: bridge_opportunity_date.opportunity_id
+	toColumn: fact_opportunities.opportunity_id
+
+relationship AutoDetected_2e2cdedb-672a-4a97-bca3-d5d5638e414b
+	fromColumn: fact_opportunities.sales_rep_id
+	toColumn: dim_sales_reps.sales_rep_id
+
+relationship c641fe09-4a59-19a2-e125-65bb8e14b06a
+	fromColumn: fact_opportunities.account_id
+	toColumn: dim_accounts.account_id
+
+relationship AutoDetected_c732ee43-0d74-4578-9102-48fcfd91500e
+	fromColumn: bridge_opportunity_date.DateKey
+	toColumn: dim_date.DateKey
+
