@@ -195,20 +195,9 @@ Recommendation: Rename dim_date columns to snake_case (`date_key`, `year`, `mont
 
 ---
 
-**[INFO] No DAX measures defined**
+**[INFO] ✓ No DAX measures defined — resolved**
 
-The model contains zero explicit DAX measures. All aggregation relies on implicit column-level `summarizeBy` settings. This works for basic visuals but makes it difficult to enforce consistent business logic (e.g., win rate definition, weighted pipeline calculation).
-
-Recommended foundational measures to add:
-
-| Measure | DAX sketch |
-|---|---|
-| Total Revenue | `SUM(fact_opportunities[amount])` |
-| Weighted Pipeline | `SUMX(fact_opportunities, fact_opportunities[amount] * fact_opportunities[probability])` |
-| Win Rate | `DIVIDE(COUNTROWS(FILTER(fact_opportunities, fact_opportunities[is_won])), COUNTROWS(fact_opportunities))` |
-| Open Opportunity Count | `SUMX(fact_opportunities, fact_opportunities[is_open])` |
-| Avg Deal Size | `AVERAGE(fact_opportunities[amount])` |
-| Avg Actual Cycle Days | `AVERAGE(fact_opportunities[actual_cycle_days])` |
+Seven explicit measures added to `fact_opportunities`: Total Revenue, Open Pipeline, Weighted Pipeline, Win Rate, Open Opportunity Count, Avg Deal Size, Avg Actual Cycle Days.
 
 ---
 
@@ -238,7 +227,7 @@ Recommended foundational measures to add:
 |---|---|---|---|
 | 1 | Bug | `fact_opportunities.product_id` — change `summarizeBy` from `sum` to `none` | ✓ done |
 | 2 | Bug | `bridge_opportunity_date` M query — fix date format string `"yyyMMdd"` → `"yyyyMMdd"` | ✓ done |
-| 3 | High | Define six foundational DAX measures (see Findings section) | open — requires Desktop |
+| 3 | High | Define foundational DAX measures (Total Revenue, Open Pipeline, Weighted Pipeline, Win Rate, Open Opportunity Count, Avg Deal Size, Avg Actual Cycle Days) | ✓ done |
 | 4 | Medium | Convert `is_open` and `is_lost` from `int64` to `boolean` | open |
 | 5 | Medium | Replace `dim_sales_reps.tenure_days` stored column with a DAX measure | open |
 | 6 | Medium | Widen (or parameterize) the `dim_date` 3-year filter | open |
