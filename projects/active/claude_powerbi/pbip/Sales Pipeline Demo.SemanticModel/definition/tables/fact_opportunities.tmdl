@@ -45,7 +45,7 @@ table fact_opportunities
 		dataType: int64
 		formatString: 0
 		lineageTag: c64ddb11-7e9d-4478-ab63-269092eac6de
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: product_id
 
 		annotation SummarizationSetBy = Automatic

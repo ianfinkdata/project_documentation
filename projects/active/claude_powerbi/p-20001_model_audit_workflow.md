@@ -232,6 +232,20 @@ Recommended foundational measures to add:
 
 ---
 
+## Action Items — Sales Pipeline Demo
+
+| # | Priority | Item | Status |
+|---|---|---|---|
+| 1 | Bug | `fact_opportunities.product_id` — change `summarizeBy` from `sum` to `none` | ✓ done |
+| 2 | Bug | `bridge_opportunity_date` M query — fix date format string `"yyyMMdd"` → `"yyyyMMdd"` | ✓ done |
+| 3 | High | Define six foundational DAX measures (see Findings section) | open — requires Desktop |
+| 4 | Medium | Convert `is_open` and `is_lost` from `int64` to `boolean` | open |
+| 5 | Medium | Replace `dim_sales_reps.tenure_days` stored column with a DAX measure | open |
+| 6 | Medium | Widen (or parameterize) the `dim_date` 3-year filter | open |
+| 7 | Low | Rename `dim_date` columns to snake_case — breaking change, do before reports proliferate | open |
+
+---
+
 ## Implementation Notes
 
 **To run this audit on a new model:**
