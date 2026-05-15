@@ -45,7 +45,7 @@ table fact_opportunities
 		dataType: int64
 		formatString: 0
 		lineageTag: c64ddb11-7e9d-4478-ab63-269092eac6de
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: product_id
 
 		annotation SummarizationSetBy = Automatic
@@ -216,6 +216,41 @@ table fact_opportunities
 		sourceColumn: days_open_current
 
 		annotation SummarizationSetBy = Automatic
+
+	/// Total revenue from closed won opportunities.
+	measure 'Total Revenue' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
+		formatString: "$#,0"
+		lineageTag: 3f8a9c2e-1b4d-4e7f-9a0c-2d5e8b1f3c6a
+
+	/// Total deal value of all currently open opportunities.
+	measure 'Open Pipeline' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_open] = 1)
+		formatString: "$#,0"
+		lineageTag: 7d2e5f8a-4c1b-4a9e-8d3f-6b0c9e2a5d7f
+
+	/// Sum of amount × probability for open opportunities.
+	measure 'Weighted Pipeline' = CALCULATE(SUM(fact_opportunities[weighted_amount]), fact_opportunities[is_open] = 1)
+		formatString: "$#,0"
+		lineageTag: 1c4f7b0e-8a3d-4f2c-9e6b-5a8d1c4f7b0e
+
+	/// Percentage of closed opportunities that were won.
+	measure 'Win Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_won] = TRUE()), CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_closed] = TRUE()))
+		formatString: "0.0%"
+		lineageTag: 9b6e3a0d-2f5c-4b8e-1a4d-7c0f3b6e9a2d
+
+	/// Count of opportunities currently open.
+	measure 'Open Opportunity Count' = CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_open] = 1)
+		formatString: "0"
+		lineageTag: 5e8b1f4c-7a0d-4e3f-2c9b-8d5a2f1e4b7c
+
+	/// Average deal amount across closed won opportunities.
+	measure 'Avg Deal Size' = CALCULATE(AVERAGE(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
+		formatString: "$#,0"
+		lineageTag: 2d5a8c1f-3e6b-4f9a-0d2c-5f8b3e6a9c1d
+
+	/// Average number of days from created date to actual close, for closed opportunities.
+	measure 'Avg Actual Cycle Days' = CALCULATE(AVERAGE(fact_opportunities[actual_cycle_days]), fact_opportunities[is_closed] = TRUE())
+		formatString: "0"
+		lineageTag: 8c1f4b7e-5d2a-4c9f-3b6e-1a8d5c2f9b4e
 
 	partition fact_opportunities = m
 		mode: import

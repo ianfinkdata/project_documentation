@@ -52,7 +52,7 @@ table bridge_opportunity_date
 				let
 				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
 				    sales_pipeline_bridge_opportunity_date = Source{[Schema="sales_pipeline",Item="bridge_opportunity_date"]}[Data],
-				    #"Added Custom" = Table.AddColumn(sales_pipeline_bridge_opportunity_date, "DateKey", each Int64.From(Date.ToText([date], "yyyMMdd")), Int64.Type)
+				    #"Added Custom" = Table.AddColumn(sales_pipeline_bridge_opportunity_date, "DateKey", each Int64.From(Date.ToText([date], "yyyyMMdd")), Int64.Type)
 				in
 				    #"Added Custom"
 

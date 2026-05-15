@@ -62,7 +62,8 @@ projects/
 
 - **No subfolders within a project** — all files sit directly in the project folder
 - **Moving between states** means moving the folder between `active/`, `complete/`, and `paused/` — the folder name never changes
-- **Every project** gets a `J-XXXXX_project_name.md` file — both the ticket number and project name are visible in the file listing without opening anything
+- **Every project** gets a `p-XXXXX_project_name.md` file — both the ticket number and project name are visible in the file listing without opening anything
+- **Power BI projects** store `.pbip` folders as `pbip_[filename]` where `[filename]` is the `.pbip` filename without the extension — makes the report identity visible in the directory listing and supports multiple `.pbip` projects within a single ticket folder
 - **File naming** should be descriptive enough to identify purpose without opening the file
 
 ---

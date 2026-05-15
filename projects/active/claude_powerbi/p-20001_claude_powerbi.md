@@ -41,6 +41,20 @@ Microsoft released a Power BI MCP Server (preview, Nov 2025) that allows Claude 
 
 The integration point is the semantic model layer, not the report or UI layer.
 
+## Folder structure
+
+```
+claude_powerbi/
+├── p-20001_claude_powerbi.md
+├── p-20001_model_audit_workflow.md
+└── pbip_sales_pipeline_demo/
+    ├── Sales Pipeline Demo.pbip
+    ├── Sales Pipeline Demo.Report/
+    └── Sales Pipeline Demo.SemanticModel/
+```
+
+Power BI project folders are named `pbip_[filename]` using the `.pbip` filename (without extension). This keeps the report identity visible in the directory listing and supports multiple `.pbip` projects within the same ticket folder.
+
 ## Reference links
 
 - [Use Claude to Talk to Your Power BI XMLA Data via CData Connect AI](https://www.cdata.com/kb/tech/powerbixmla-cloud-claude.rst)
