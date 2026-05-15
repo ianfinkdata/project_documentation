@@ -47,7 +47,7 @@ The integration point is the semantic model layer, not the report or UI layer.
 claude_powerbi/
 ├── p-20001_claude_powerbi.md
 ├── p-20001_model_audit_workflow.md
-└── pbip_Sales Pipeline Demo/
+└── pbip_sales_pipeline_demo/
     ├── Sales Pipeline Demo.pbip
     ├── Sales Pipeline Demo.Report/
     └── Sales Pipeline Demo.SemanticModel/
