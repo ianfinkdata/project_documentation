@@ -1,119 +1,104 @@
 table dim_date
 	lineageTag: bb203f38-a1a4-4e83-85fc-e801996e7494
-	dataCategory: Time
 
-	/// Integer surrogate key uniquely identifying each date (format YYYYMMDD). Primary key for this table.
-	column DateKey
+	column date_key
 		dataType: int64
 		formatString: 0
-		lineageTag: 1f281470-2486-4c02-87f0-9b234ae974d4
+		lineageTag: 7ee30b87-a7f1-4235-a18c-25a2310ccd12
 		summarizeBy: none
-		sourceColumn: DateKey
+		sourceColumn: date_key
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Full calendar date value.
-	column Date
+	column date
 		dataType: dateTime
-		isKey
-		formatString: MM/DD/YY
-		lineageTag: 7c60def9-d131-436a-b128-ca4bf1148914
+		formatString: Long Date
+		lineageTag: cdae5b07-6f82-430a-a8b2-a675db158247
 		summarizeBy: none
-		sourceColumn: Date
+		sourceColumn: date
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
-		annotation PBI_FormatHint = {"isCustom":true}
-
-	/// Calendar year number (e.g., 2024).
-	column Year
+	column year
 		dataType: int64
 		formatString: 0
-		lineageTag: e1a6e524-cac6-48d1-87c2-56cdb168615b
+		lineageTag: 57c1de7b-6133-451d-9132-ff8e351ecd07
 		summarizeBy: none
-		sourceColumn: Year
+		sourceColumn: year
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Numeric month of the year (1=January through 12=December).
-	column MonthNum
+	column month_num
 		dataType: int64
 		formatString: 0
-		lineageTag: f657ca29-e279-46da-bf76-9061cd06cc4e
+		lineageTag: fcf83f01-79cd-49a6-8a8c-2437b8f8f43c
 		summarizeBy: none
-		sourceColumn: MonthNum
+		sourceColumn: month_num
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Full month name (e.g., January, February).
-	column Month
+	column month
 		dataType: string
-		lineageTag: 3ddc68a7-3f1c-4a5a-8cde-d53aea42bcbb
+		lineageTag: 87ab443c-740b-41a5-a4d2-ce67d21f4953
 		summarizeBy: none
-		sourceColumn: Month
+		sourceColumn: month
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Calendar quarter number (1 through 4).
-	column Quarter
+	column quarter
 		dataType: int64
 		formatString: 0
-		lineageTag: db5988b8-b679-4976-bbe7-d1533fcba8e9
+		lineageTag: e3a0e5f2-2faa-4ac2-a414-d8b5d7f23dcd
 		summarizeBy: none
-		sourceColumn: Quarter
+		sourceColumn: quarter
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Numeric day of the week (1=Sunday through 7=Saturday).
-	column WeekDay
+	column week_day
 		dataType: int64
 		formatString: 0
-		lineageTag: 2f265bfa-21d4-4c3f-979b-60ea28732e68
+		lineageTag: e6c73876-9005-4424-a0b2-f5a2e933b2b7
 		summarizeBy: none
-		sourceColumn: WeekDay
+		sourceColumn: week_day
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Full name of the day of the week (e.g., Monday, Tuesday).
-	column WeekDayName
+	column week_day_name
 		dataType: string
-		lineageTag: 3be9edd3-b6d0-4f35-80fc-e7dad33842cf
+		lineageTag: be65f8b3-7b40-40c6-968c-6a3bf7c8ba88
 		summarizeBy: none
-		sourceColumn: WeekDayName
+		sourceColumn: week_day_name
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Flag indicating whether the date falls on a weekend (1=Yes, 0=No).
-	column IsWeekend
+	column is_weekend
 		dataType: int64
 		formatString: 0
-		lineageTag: e9377951-5439-4399-a9b6-870840acec56
+		lineageTag: 4f3d8029-479b-4f3c-bbe4-7f15cd5c6236
 		summarizeBy: none
-		sourceColumn: IsWeekend
+		sourceColumn: is_weekend
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Date of the first day (Sunday) of the week containing this date.
-	column WeekStart
+	column week_start
 		dataType: dateTime
 		formatString: Long Date
-		lineageTag: cb5820af-0b97-4678-b0ee-4446ac9de720
+		lineageTag: cadf7c00-e7ec-4a43-9efb-7daaf9d60bf9
 		summarizeBy: none
-		sourceColumn: WeekStart
+		sourceColumn: week_start
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	/// ISO 8601 week start date (Monday) of the week containing this date.
-	column ISOWeekStart
+	column iso_week_start
 		dataType: dateTime
 		formatString: Long Date
-		lineageTag: 7f7fd45b-43df-4e5e-943b-90e376ca762a
+		lineageTag: d1b54762-fcb5-49a9-8676-e502474844ad
 		summarizeBy: none
-		sourceColumn: ISOWeekStart
+		sourceColumn: iso_week_start
 
 		annotation SummarizationSetBy = Automatic
 
@@ -124,9 +109,9 @@ table dim_date
 		queryGroup: 'sales_pipeline dimensions'
 		source =
 				let
-				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
-				    sales_pipeline_dim_date = Source{[Schema="sales_pipeline",Item="dim_date"]}[Data],
-				    #"Filtered Rows" = Table.SelectRows(sales_pipeline_dim_date, each Date.IsInPreviousNYears([Date], 2) or Date.IsInCurrentYear([Date]))
+				    Source = MySQL.Database("127.0.0.1", "common_db", [ReturnSingleDatabase=true]),
+				    sales_pipeline_dim_date = Source{[Schema="common_db",Item="dim_date"]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(sales_pipeline_dim_date, each Date.IsInPreviousNYears([date], 2) or Date.IsInCurrentYear([date]))
 				in
 				    #"Filtered Rows"
 

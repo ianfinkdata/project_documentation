@@ -1,6 +1,41 @@
 table fact_opportunities
 	lineageTag: df488d23-5091-4f34-b00c-6a4023ff1e43
 
+	/// Total revenue from closed won opportunities.
+	measure 'Total Revenue' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
+		formatString: $#,0
+		lineageTag: 3f8a9c2e-1b4d-4e7f-9a0c-2d5e8b1f3c6a
+
+	/// Total deal value of all currently open opportunities.
+	measure 'Open Pipeline' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_open] = 1)
+		formatString: $#,0
+		lineageTag: 7d2e5f8a-4c1b-4a9e-8d3f-6b0c9e2a5d7f
+
+	/// Sum of amount × probability for open opportunities.
+	measure 'Weighted Pipeline' = CALCULATE(SUM(fact_opportunities[weighted_amount]), fact_opportunities[is_open] = 1)
+		formatString: $#,0
+		lineageTag: 1c4f7b0e-8a3d-4f2c-9e6b-5a8d1c4f7b0e
+
+	/// Percentage of closed opportunities that were won.
+	measure 'Win Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_won] = TRUE()), CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_closed] = TRUE()))
+		formatString: 0.0%
+		lineageTag: 9b6e3a0d-2f5c-4b8e-1a4d-7c0f3b6e9a2d
+
+	/// Count of opportunities currently open.
+	measure 'Open Opportunity Count' = CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_open] = 1)
+		formatString: 0
+		lineageTag: 5e8b1f4c-7a0d-4e3f-2c9b-8d5a2f1e4b7c
+
+	/// Average deal amount across closed won opportunities.
+	measure 'Avg Deal Size' = CALCULATE(AVERAGE(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
+		formatString: $#,0
+		lineageTag: 2d5a8c1f-3e6b-4f9a-0d2c-5f8b3e6a9c1d
+
+	/// Average number of days from created date to actual close, for closed opportunities.
+	measure 'Avg Actual Cycle Days' = CALCULATE(AVERAGE(fact_opportunities[actual_cycle_days]), fact_opportunities[is_closed] = TRUE())
+		formatString: 0
+		lineageTag: 8c1f4b7e-5d2a-4c9f-3b6e-1a8d5c2f9b4e
+
 	/// Unique identifier for each sales opportunity. Primary key for this table.
 	column opportunity_id
 		dataType: int64
@@ -169,20 +204,20 @@ table fact_opportunities
 
 	/// Flag indicating the opportunity is still active and in progress (1=Open, 0=Closed).
 	column is_open
-		dataType: int64
-		formatString: 0
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
 		lineageTag: a1ceb38c-8e6e-4bba-ba0c-8c2595016589
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: is_open
 
 		annotation SummarizationSetBy = Automatic
 
 	/// Flag indicating the opportunity was closed as lost (1=Lost, 0=Otherwise).
 	column is_lost
-		dataType: int64
-		formatString: 0
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
 		lineageTag: 89537c25-89cd-47b3-9cc1-efb8a34974aa
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: is_lost
 
 		annotation SummarizationSetBy = Automatic
@@ -217,50 +252,16 @@ table fact_opportunities
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Total revenue from closed won opportunities.
-	measure 'Total Revenue' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
-		formatString: "$#,0"
-		lineageTag: 3f8a9c2e-1b4d-4e7f-9a0c-2d5e8b1f3c6a
-
-	/// Total deal value of all currently open opportunities.
-	measure 'Open Pipeline' = CALCULATE(SUM(fact_opportunities[amount]), fact_opportunities[is_open] = 1)
-		formatString: "$#,0"
-		lineageTag: 7d2e5f8a-4c1b-4a9e-8d3f-6b0c9e2a5d7f
-
-	/// Sum of amount × probability for open opportunities.
-	measure 'Weighted Pipeline' = CALCULATE(SUM(fact_opportunities[weighted_amount]), fact_opportunities[is_open] = 1)
-		formatString: "$#,0"
-		lineageTag: 1c4f7b0e-8a3d-4f2c-9e6b-5a8d1c4f7b0e
-
-	/// Percentage of closed opportunities that were won.
-	measure 'Win Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_won] = TRUE()), CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_closed] = TRUE()))
-		formatString: "0.0%"
-		lineageTag: 9b6e3a0d-2f5c-4b8e-1a4d-7c0f3b6e9a2d
-
-	/// Count of opportunities currently open.
-	measure 'Open Opportunity Count' = CALCULATE(COUNTROWS(fact_opportunities), fact_opportunities[is_open] = 1)
-		formatString: "0"
-		lineageTag: 5e8b1f4c-7a0d-4e3f-2c9b-8d5a2f1e4b7c
-
-	/// Average deal amount across closed won opportunities.
-	measure 'Avg Deal Size' = CALCULATE(AVERAGE(fact_opportunities[amount]), fact_opportunities[is_won] = TRUE())
-		formatString: "$#,0"
-		lineageTag: 2d5a8c1f-3e6b-4f9a-0d2c-5f8b3e6a9c1d
-
-	/// Average number of days from created date to actual close, for closed opportunities.
-	measure 'Avg Actual Cycle Days' = CALCULATE(AVERAGE(fact_opportunities[actual_cycle_days]), fact_opportunities[is_closed] = TRUE())
-		formatString: "0"
-		lineageTag: 8c1f4b7e-5d2a-4c9f-3b6e-1a8d5c2f9b4e
-
 	partition fact_opportunities = m
 		mode: import
 		queryGroup: 'sales_pipeline fact'
 		source =
 				let
 				    Source = MySQL.Database("127.0.0.1", "sales_pipeline", [ReturnSingleDatabase=true]),
-				    sales_pipeline_fact_opportunities = Source{[Schema="sales_pipeline",Item="fact_opportunities"]}[Data]
+				    sales_pipeline_fact_opportunities = Source{[Schema="sales_pipeline",Item="fact_opportunities"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(sales_pipeline_fact_opportunities,{{"is_open", type logical}, {"is_lost", type logical}})
 				in
-				    sales_pipeline_fact_opportunities
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 

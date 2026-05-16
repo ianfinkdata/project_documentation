@@ -10,7 +10,7 @@ relationship c641fe09-4a59-19a2-e125-65bb8e14b06a
 	fromColumn: fact_opportunities.account_id
 	toColumn: dim_accounts.account_id
 
-relationship AutoDetected_c732ee43-0d74-4578-9102-48fcfd91500e
+relationship AutoDetected_36acfadf-c5c0-4473-b713-71bf891068d0
 	fromColumn: bridge_opportunity_date.DateKey
-	toColumn: dim_date.DateKey
+	toColumn: dim_date.date_key
 
