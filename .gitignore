@@ -2,6 +2,9 @@
 projects/complete/
 projects/paused/
 
+# Claude Code worktrees — ephemeral, per-session, not source-controllable
+.claude/worktrees/
+
 # Power BI Project (.pbip) local files — auto-generated, per-machine, not source-controllable
 **/.pbi/cache.abf
 **/.pbi/localSettings.json
