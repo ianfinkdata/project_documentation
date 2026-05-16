@@ -6,7 +6,9 @@ Active production projects use `p-` prefixed ticket numbers (e.g., `p-20001`).
 
 `J-` ticket projects and projects in `projects/paused/` and `projects/complete/` are legacy demo projects used to establish and validate the folder structure. Do not reference, modify, or create files in these projects unless the user explicitly mentions a J-ticket or demo project by name.
 
-All net new work goes under `projects/active/` with a `p-` ticket number.
+All net new work goes under `projects/active/` with a `p-` ticket number. Direct subfolders of `projects/active/`, `projects/paused/`, and `projects/complete/` must always be named starting with `p-` (e.g., `p-20001_claude_powerbi/`).
+
+The main readme for a ticket folder is named `[folder-name]_readme.md` (e.g., `p-20001_claude_powerbi_readme.md`). Artifact-specific docs (e.g., a model audit workflow for a specific `.pbip`) belong inside their artifact subfolder, not at the ticket root.
 
 ## Power BI project conventions
 

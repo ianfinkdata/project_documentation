@@ -44,14 +44,16 @@ The integration point is the semantic model layer, not the report or UI layer.
 ## Folder structure
 
 ```
-claude_powerbi/
-├── p-20001_claude_powerbi.md
-├── p-20001_model_audit_workflow.md
+p-20001_claude_powerbi/
+├── p-20001_claude_powerbi_readme.md
 └── pbip_sales_pipeline_demo/
+    ├── p-20001_model_audit_workflow.md
     ├── Sales Pipeline Demo.pbip
     ├── Sales Pipeline Demo.Report/
     └── Sales Pipeline Demo.SemanticModel/
 ```
+
+Ticket folders under `active/`, `paused/`, and `complete/` always start with `p-` (e.g., `p-20001_claude_powerbi/`). The main readme uses the `_readme` suffix to distinguish it from artifact-specific docs. Artifact-specific docs (such as model audit workflows) live inside their own artifact subfolder, not at the ticket root.
 
 Power BI project folders are named `pbip_[filename]` using the `.pbip` filename (without extension). This keeps the report identity visible in the directory listing and supports multiple `.pbip` projects within the same ticket folder.
 
