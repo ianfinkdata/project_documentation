@@ -125,7 +125,7 @@ column product_id
 
 ---
 
-**[WARNING] fact_opportunities — Inconsistent boolean flag types**
+**[WARNING] ✓ fact_opportunities — Inconsistent boolean flag types — resolved**
 
 Four flag columns use two different data types:
 
@@ -138,7 +138,7 @@ Four flag columns use two different data types:
 
 This inconsistency causes different default behavior in visuals and DAX. Pick one convention and apply it across all four.
 
-Recommendation: Convert `is_open` and `is_lost` to `boolean` to match `is_closed` and `is_won`.
+Resolution: `is_open` and `is_lost` are computed expressions in the underlying MySQL view (not base columns), so the type could not be changed at the database level. Fixed by applying boolean type coercion in Power Query and updating the three affected DAX measures (`Open Pipeline`, `Weighted Pipeline`, `Open Opportunity Count`) from `= 1` to `= TRUE()`.
 
 ---
 
@@ -206,9 +206,9 @@ Seven explicit measures added to `fact_opportunities`: Total Revenue, Open Pipel
 | Severity | Count |
 |---|---|
 | ERROR | 1 |
-| WARNING | 6 |
+| WARNING | 5 |
 | INFO | 1 |
-| **Total** | **8** |
+| **Total** | **7** |
 
 | Category | Issues |
 |---|---|
@@ -228,7 +228,7 @@ Seven explicit measures added to `fact_opportunities`: Total Revenue, Open Pipel
 | 1 | Bug | `fact_opportunities.product_id` — change `summarizeBy` from `sum` to `none` | ✓ done |
 | 2 | Bug | `bridge_opportunity_date` M query — fix date format string `"yyyMMdd"` → `"yyyyMMdd"` | ✓ done |
 | 3 | High | Define foundational DAX measures (Total Revenue, Open Pipeline, Weighted Pipeline, Win Rate, Open Opportunity Count, Avg Deal Size, Avg Actual Cycle Days) | ✓ done |
-| 4 | Medium | Convert `is_open` and `is_lost` from `int64` to `boolean` | open |
+| 4 | Medium | Convert `is_open` and `is_lost` from `int64` to `boolean` | ✓ done |
 | 5 | Medium | Replace `dim_sales_reps.tenure_days` stored column with a DAX measure | open |
 | 6 | Medium | Widen (or parameterize) the `dim_date` 3-year filter | open |
 | 7 | Low | Rename `dim_date` columns to snake_case — breaking change, do before reports proliferate | open |
